@@ -1,0 +1,52 @@
+version: '3.5'
+
+services:
+  host_a:
+    build: ./host_a/build
+    image: host:basic
+    privileged: true
+    volumes:
+      - vol_a 
+    networks:
+      network:
+        ipv4_address: 10.1.0.2
+
+  host_b:
+    image: host:basic
+    volumes:
+      - vol_b  
+    privileged: true
+    networks:
+      network:
+        ipv4_address: 10.1.0.3
+
+  host_c:
+    image: host:basic
+    volumes:
+      - vol_c 
+    privileged: true
+    networks:
+      network:
+        ipv4_address: 10.1.0.4
+
+  host_d:
+    image: host:basic
+    volumes:
+      - vol_d 
+    privileged: true
+    networks:
+      network:
+        ipv4_address: 10.1.0.5
+
+volumes:
+  vol_a:
+  vol_b:
+  vol_c:
+  vol_d:
+
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.1.0.0/24
